@@ -232,7 +232,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
           onTap:
           _onItemTapped,
-          //Navigator.push(context, add(builder:(context) => Alerts()));
+
         ),
       ),
     );
@@ -241,6 +241,13 @@ class _MyHomePageState extends State<MyHomePage> {
   void _onItemTapped(int index) {
     setState(() {
       SelectedPage = index;
+      switch(index){
+        case 1: Navigator.push(context, MaterialPageRoute(builder: (context) => dashbord()));break;
+        case 2: Navigator.push(context, MaterialPageRoute(builder: (context) => add()));break;
+        case 3: Navigator.push(context, MaterialPageRoute(builder: (context) => maps()));break;
+        case 4: Navigator.push(context, MaterialPageRoute(builder: (context) => Alerts()));break;
+      };
+
     });
   }
 }
