@@ -121,6 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
           child: Column(
             children:[
+
               Row(
                 children: [
                   Container(
@@ -164,6 +165,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 //margin:EdgeInsets.only(right: 250,left:10,bottom:470),
 
               ),
+
+              Card(
+                  color: Colors.grey[200],
+                  child: Padding(
+                    padding: EdgeInsets.only(right:10,left: 10,top: 10),
+                    child: TextField(
+                      readOnly: true,
+                      maxLines: 5, //or null
+                      onTap: null,
+                      decoration: InputDecoration.collapsed(
+                          hintText: "What does we should to leaarn to be a nice programmer!"),
+                    ),
+                  )
+              ),
+
             ],
           ),
 
