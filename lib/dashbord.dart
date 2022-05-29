@@ -1,11 +1,14 @@
 
+import 'package:ap_project/chat.dart';
+import 'package:ap_project/inbox.dart';
+
 import 'Alerts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'feed.dart';
 import 'add.dart';
 import 'maps.dart';
-
+import 'chat.dart';
 class dashbord extends StatefulWidget {
   const dashbord ({Key key}) : super(key: key);
 
@@ -105,37 +108,36 @@ class _dashbord extends State<dashbord> {
             icon: Icon(
               SelectedPage==0?Icons.home:
               Icons.home_outlined,
-              color: Colors.deepOrange,
+              color: Colors.black,
 
             ),
             label: 'Home',
-            backgroundColor : Colors.white,
           ),
           BottomNavigationBarItem(
             icon: Icon(
               SelectedPage==1? Icons.dashboard:Icons.dashboard_outlined,
-              color: Colors.deepOrange,
+              color: Colors.black,
             ),
             label: 'Discover',
           ),
           BottomNavigationBarItem(
             icon: Icon(SelectedPage==2?Icons.add_circle:
             Icons.add,
-              color: Colors.deepOrange,
+              color: Colors.black,
             ),
             label: 'Creat',
           ),
           BottomNavigationBarItem(
-            icon: Icon(SelectedPage==3?Icons.maps_ugc:
-            Icons.maps_ugc_sharp,
-              color: Colors.deepOrange,
+            icon: Icon(SelectedPage==3?Icons.chat_rounded:
+            Icons.chat_outlined,
+              color: Colors.black,
             ),
             label: 'Chat',
           ),
           BottomNavigationBarItem(
             icon: Icon(SelectedPage==4?Icons.add_alert:
             Icons.add_alert_outlined,
-              color: Colors.deepOrange,
+              color: Colors.black,
             ),
             label: 'Inbox',
           )
@@ -151,8 +153,8 @@ class _dashbord extends State<dashbord> {
       switch(index){
         case 0: Navigator.push(context, MaterialPageRoute(builder: (context) => FeedPage()));break;
         case 2: Navigator.push(context, MaterialPageRoute(builder: (context) => add()));break;
-        case 3: Navigator.push(context, MaterialPageRoute(builder: (context) => maps()));break;
-        case 4: Navigator.push(context, MaterialPageRoute(builder: (context) => Alerts()));break;
+        case 3: Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage()));break;
+        case 4: Navigator.push(context, MaterialPageRoute(builder: (context) => InboxPage()));break;
       };
 
     });
