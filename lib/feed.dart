@@ -108,7 +108,7 @@ class _FeedPage extends State<FeedPage> {
           leading: IconButton(
             icon: Icon(
               Icons.dehaze,
-              color: Colors.indigo,
+              color: Colors.deepOrange,
             ),
             padding: EdgeInsets.only(left: 10),
             onPressed: () {
@@ -148,7 +148,7 @@ class _FeedPage extends State<FeedPage> {
             IconButton(
               icon: Icon(
                 Icons.settings,
-                color: Colors.indigo,
+                color: Colors.deepOrange,
               ),
               padding: EdgeInsets.only(right:30),
               onPressed: () {
@@ -175,7 +175,7 @@ class _FeedPage extends State<FeedPage> {
 
               ),
               label: '',
-              backgroundColor : Colors.lightGreen,
+              backgroundColor : Colors.white,
             ),
             BottomNavigationBarItem(
               icon: Icon(
