@@ -10,10 +10,7 @@ import 'add.dart';
 import 'dashbord.dart';
 //import 'package:redit/SplashScreen.dart';
 import 'setting.dart';
-
-void main() {
-  runApp(const MyApp());
-}
+import 'chat.dart';
 
 class User{
   Community community;
@@ -72,7 +69,7 @@ class FeedPage extends StatefulWidget {
 
 class _FeedPage extends State<FeedPage> {
   List<Post> list = [
-    Post(55, 33, User("maaamod",Community("company1")), "helloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"),
+    Post(55, 33, User("maaamod",Community("company1")), "hellooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"),
     Post(52, 655, User("nader",Community("company2")), "salam"),
     Post(500, 33, User("abolfazl",Community("company3")), "bye"),
     Post(53, 6, User("mehdi",Community("company4")), "bah bah"),
@@ -166,6 +163,7 @@ class _FeedPage extends State<FeedPage> {
         ),
 
         bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           iconSize: 30,
           items:[
             BottomNavigationBarItem(
@@ -175,7 +173,7 @@ class _FeedPage extends State<FeedPage> {
                 color: Colors.deepOrange,
 
               ),
-              label: '',
+              label: 'Home',
               backgroundColor : Colors.white,
             ),
             BottomNavigationBarItem(
@@ -183,28 +181,28 @@ class _FeedPage extends State<FeedPage> {
                 SelectedPage==1? Icons.dashboard:Icons.dashboard_outlined,
                 color: Colors.deepOrange,
               ),
-              label: '',
+              label: 'Discover',
             ),
             BottomNavigationBarItem(
               icon: Icon(SelectedPage==2?Icons.add_circle:
               Icons.add,
                 color: Colors.deepOrange,
               ),
-              label: '',
+              label: 'Creat',
             ),
             BottomNavigationBarItem(
-              icon: Icon(SelectedPage==3?Icons.maps_ugc:
-              Icons.maps_ugc_sharp,
+              icon: Icon(SelectedPage==3?Icons.chat_rounded:
+              Icons.chat_outlined,
                 color: Colors.deepOrange,
               ),
-              label: '',
+              label: 'Chat',
             ),
             BottomNavigationBarItem(
               icon: Icon(SelectedPage==4?Icons.add_alert:
               Icons.add_alert_outlined,
                 color: Colors.deepOrange,
               ),
-              label: '',
+              label: 'Inbox',
             )
           ],
           onTap:_onItemTapped,
@@ -219,7 +217,7 @@ class _FeedPage extends State<FeedPage> {
       switch(index){
         case 1: Navigator.push(context, MaterialPageRoute(builder: (context) => dashbord()));break;
         case 2: Navigator.push(context, MaterialPageRoute(builder: (context) => add()));break;
-        case 3: Navigator.push(context, MaterialPageRoute(builder: (context) => maps()));break;
+        case 3: Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage()));break;
         case 4: Navigator.push(context, MaterialPageRoute(builder: (context) => Alerts()));break;
       };
 

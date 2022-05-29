@@ -98,6 +98,7 @@ class _dashbord extends State<dashbord> {
 
 
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         iconSize: 30,
         items:[
           BottomNavigationBarItem(
@@ -107,7 +108,7 @@ class _dashbord extends State<dashbord> {
               color: Colors.deepOrange,
 
             ),
-            label: '',
+            label: 'Home',
             backgroundColor : Colors.white,
           ),
           BottomNavigationBarItem(
@@ -115,28 +116,28 @@ class _dashbord extends State<dashbord> {
               SelectedPage==1? Icons.dashboard:Icons.dashboard_outlined,
               color: Colors.deepOrange,
             ),
-            label: '',
+            label: 'Discover',
           ),
           BottomNavigationBarItem(
             icon: Icon(SelectedPage==2?Icons.add_circle:
             Icons.add,
               color: Colors.deepOrange,
             ),
-            label: '',
+            label: 'Creat',
           ),
           BottomNavigationBarItem(
             icon: Icon(SelectedPage==3?Icons.maps_ugc:
             Icons.maps_ugc_sharp,
               color: Colors.deepOrange,
             ),
-            label: '',
+            label: 'Chat',
           ),
           BottomNavigationBarItem(
             icon: Icon(SelectedPage==4?Icons.add_alert:
             Icons.add_alert_outlined,
               color: Colors.deepOrange,
             ),
-            label: '',
+            label: 'Inbox',
           )
         ],
         onTap:_onItemTapped,
