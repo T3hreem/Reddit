@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'signup.dart';
 import 'login.dart';
 class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+  const WelcomePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +49,7 @@ class WelcomePage extends StatelessWidget {
                         height: 60,
                         onPressed: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+
                         },
                         shape: RoundedRectangleBorder(
                             side: BorderSide(

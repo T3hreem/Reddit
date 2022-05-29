@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'feed.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +72,9 @@ class LoginPage extends StatelessWidget {
                         child: MaterialButton(
                           minWidth: double.infinity,
                           height: 60,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => FeedPage()));
+                          },
                           color: Colors.deepOrange,
                           elevation: 0,
                           shape: RoundedRectangleBorder(

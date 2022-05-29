@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'feed.dart';
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+  const SignUpPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,9 @@ class SignUpPage extends StatelessWidget {
                         child: MaterialButton(
                           minWidth: double.infinity,
                           height: 60,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => FeedPage()));
+                          },
                           color: Colors.deepOrange,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
