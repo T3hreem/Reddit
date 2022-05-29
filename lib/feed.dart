@@ -9,6 +9,7 @@ import 'maps.dart';
 import 'add.dart';
 import 'dashbord.dart';
 //import 'package:redit/SplashScreen.dart';
+import 'setting.dart';
 
 void main() {
   runApp(const MyApp());
@@ -152,7 +153,7 @@ class _FeedPage extends State<FeedPage> {
               ),
               padding: EdgeInsets.only(right:30),
               onPressed: () {
-                // do something
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SettingPage()));
               },
             )
           ],
