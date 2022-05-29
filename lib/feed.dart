@@ -54,22 +54,22 @@ class MyApp extends StatelessWidget {
       title: 'Reddit',
       theme: ThemeData(
       ),
-      home: const MyHomePage(title: 'Reddit'),
+      home: const FeedPage(title: 'Reddit'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key key, this.title}) : super(key: key);
+class FeedPage extends StatefulWidget {
+  const FeedPage({Key key, this.title}) : super(key: key);
 
   final String title;
   @override
-  State<MyHomePage> createState() => _MyHomePageState(0);
+  State<FeedPage> createState() => _FeedPage(0);
 
 
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _FeedPage extends State<FeedPage> {
   List<Post> list = [
     Post(55, 33, User("maaamod",Community("company1")), "helloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"),
     Post(52, 655, User("nader",Community("company2")), "salam"),
@@ -87,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final double iconSize = 30;
 
 
-  _MyHomePageState(this.SelectedPage);
+  _FeedPage(this.SelectedPage);
   List<Widget> pages = [Alerts(),maps(),add(),dashbord()];
 
   @override
@@ -253,7 +253,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ListTile(
             leading: CircleAvatar(
               child: Image(
-                image: AssetImage("assets/icon.jpg"), //aks ekhtesasi
+                image: AssetImage("assets/logo.png"), //aks ekhtesasi
                 fit: BoxFit.cover,),
               backgroundColor: Colors.lightGreen,
               radius: 20,
