@@ -98,7 +98,7 @@ class _FeedPage extends State<FeedPage> {
       title:"Reddit",
 
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepOrange,
         // fontFamily: 'Parisienne',
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
@@ -256,7 +256,7 @@ class _FeedPage extends State<FeedPage> {
               child: Image(
                 image: AssetImage("assets/logo.png"), //aks ekhtesasi
                 fit: BoxFit.cover,),
-              backgroundColor: Colors.lightGreen,
+              backgroundColor: Colors.black,
               radius: 20,
             ),
             title: Text(post.user.community.name),

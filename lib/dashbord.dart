@@ -40,7 +40,7 @@ class _dashbord extends State<dashbord> {
         leading: IconButton(
           icon: Icon(
             Icons.dehaze,
-            color: Colors.indigo,
+            color: Colors.deepOrange,
           ),
           padding: EdgeInsets.only(left: 10),
           onPressed: () {
@@ -80,7 +80,7 @@ class _dashbord extends State<dashbord> {
           IconButton(
             icon: Icon(
               Icons.settings,
-              color: Colors.indigo,
+              color: Colors.deepOrange,
             ),
             padding: EdgeInsets.only(right:30),
             onPressed: () {
@@ -108,7 +108,7 @@ class _dashbord extends State<dashbord> {
 
             ),
             label: '',
-            backgroundColor : Colors.lightGreen,
+            backgroundColor : Colors.white,
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -167,7 +167,7 @@ class _dashbord extends State<dashbord> {
                     child: Image(
                         image: AssetImage("assets/logo.png"), //aks ekhtesasi
                     fit: BoxFit.cover,),
-                  backgroundColor: Colors.lightGreen,
+                  backgroundColor: Colors.black,
                   radius: 24,
                   ),
             title: Container(
