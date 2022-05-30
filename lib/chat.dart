@@ -1,4 +1,5 @@
 import 'package:ap_project/add.dart';
+import 'package:ap_project/creat.dart';
 import 'package:ap_project/dashbord.dart';
 import 'package:ap_project/inbox.dart';
 import 'package:ap_project/premium.dart';
@@ -122,7 +123,7 @@ class _ChatPageState extends State<ChatPage> {
       switch(index){
         case 0: Navigator.push(context, MaterialPageRoute(builder: (context) => FeedPage()));break;
         case 1: Navigator.push(context, MaterialPageRoute(builder: (context) => dashbord()));break;
-        case 2: Navigator.push(context, MaterialPageRoute(builder: (context) => add()));break;
+        case 2: Navigator.push(context, MaterialPageRoute(builder: (context) => CreatPage()));break;
         case 4: Navigator.push(context, MaterialPageRoute(builder: (context) => InboxPage()));break;
       };
 

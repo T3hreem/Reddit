@@ -1,20 +1,18 @@
-import 'package:ap_project/chat.dart';
-import 'package:ap_project/creat.dart';
-import 'package:ap_project/premium.dart';
+import 'package:ap_project/inbox.dart';
 import 'package:flutter/material.dart';
-import 'add.dart';
+
+import 'chat.dart';
 import 'dashbord.dart';
 import 'feed.dart';
-
-class InboxPage extends StatefulWidget {
-  const InboxPage({Key key}) : super(key: key);
+class CreatPage extends StatefulWidget {
+  const CreatPage({Key key}) : super(key: key);
 
   @override
-  State<InboxPage> createState() => _InboxPageState();
+  State<CreatPage> createState() => _CreatPageState();
 }
 
-class _InboxPageState extends State<InboxPage> {
-  int SelectedPage = 4;
+class _CreatPageState extends State<CreatPage> {
+  int SelectedPage = 2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,16 +39,16 @@ class _InboxPageState extends State<InboxPage> {
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
         child: Column(
           children: [
-           Container(
-             child: Text("Be the first to know",
-             style: TextStyle(fontSize: 24,
-             fontWeight: FontWeight.w800),),
-           ),
+            Container(
+              child: Text("Be the first to know",
+                style: TextStyle(fontSize: 24,
+                    fontWeight: FontWeight.w800),),
+            ),
             Container(
               padding: EdgeInsets.only(top: 8),
               child: Text("This is where you get update on your",
-              style: TextStyle(fontSize: 18,
-              color: Colors.grey[500]),),
+                style: TextStyle(fontSize: 18,
+                    color: Colors.grey[500]),),
             ),
             Container(
               child: Text("activity and recommendaitions",
@@ -70,7 +68,7 @@ class _InboxPageState extends State<InboxPage> {
 
               child: Text("Wow, such empty",
                 style: TextStyle(fontSize: 18,
-                    color: Colors.grey[700],
+                  color: Colors.grey[700],
                 ),
               ),
             ),
@@ -130,7 +128,7 @@ class _InboxPageState extends State<InboxPage> {
       switch(index){
         case 0: Navigator.push(context, MaterialPageRoute(builder: (context) => FeedPage()));break;
         case 1: Navigator.push(context, MaterialPageRoute(builder: (context) => dashbord()));break;
-        case 2: Navigator.push(context, MaterialPageRoute(builder: (context) => CreatPage()));break;
+        case 4: Navigator.push(context, MaterialPageRoute(builder: (context) => InboxPage()));break;
         case 3: Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage()));break;
       };
 

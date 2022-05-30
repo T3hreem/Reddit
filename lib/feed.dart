@@ -1,5 +1,6 @@
 // import 'dart:ffi';
 import 'dart:ui';
+import 'package:ap_project/creat.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -184,7 +185,7 @@ class _FeedPage extends State<FeedPage> {
           break;
         case 2:
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => add()));
+              context, MaterialPageRoute(builder: (context) => CreatPage()));
           break;
         case 3:
           Navigator.push(

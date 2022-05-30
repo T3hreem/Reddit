@@ -1,6 +1,8 @@
 
 import 'package:ap_project/chat.dart';
+import 'package:ap_project/creat.dart';
 import 'package:ap_project/inbox.dart';
+import 'package:ap_project/setting.dart';
 
 import 'Alerts.dart';
 import 'package:flutter/cupertino.dart';
@@ -87,7 +89,8 @@ class _dashbord extends State<dashbord> {
             ),
             padding: EdgeInsets.only(right:30),
             onPressed: () {
-              // do something
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SettingPage()));
             },
           )
         ],
@@ -152,7 +155,7 @@ class _dashbord extends State<dashbord> {
       SelectedPage = index;
       switch(index){
         case 0: Navigator.push(context, MaterialPageRoute(builder: (context) => FeedPage()));break;
-        case 2: Navigator.push(context, MaterialPageRoute(builder: (context) => add()));break;
+        case 2: Navigator.push(context, MaterialPageRoute(builder: (context) => CreatPage()));break;
         case 3: Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage()));break;
         case 4: Navigator.push(context, MaterialPageRoute(builder: (context) => InboxPage()));break;
       };
