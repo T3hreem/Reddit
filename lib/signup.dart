@@ -53,7 +53,7 @@ class SignUpPage extends StatelessWidget {
                           inputFile(label: "Email"),
                           inputFile(label: "Username"),
                           inputFile(label: "Password", obscureText: true),
-                          inputFile(label: "Confirm Password"),
+                          inputFile(label: "Confirm Password", obscureText: true),
                         ],
                       ),
                     ),
