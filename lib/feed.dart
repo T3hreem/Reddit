@@ -1,6 +1,5 @@
 // import 'dart:ffi';
-import 'dart:ui';
-import 'package:ap_project/creat.dart';
+import 'creat.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -20,9 +19,13 @@ class User {
 }
 
 class Community {
+  bool liked;
   //User users;
   String name;
-  Community(this.name);
+  Community(String name){
+  this.name = name;
+  liked = false;
+  }
 // Array user;
 }
 
@@ -52,24 +55,32 @@ class FeedPage extends StatefulWidget {
 
 class _FeedPage extends State<FeedPage> {
   List<Post> list = [
-    Post(55, 33, User("maaamod", Community("company1")),
-        "hellooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"),
-    Post(52, 655, User("nader", Community("company2")), "salam"),
-    Post(500, 33, User("abolfazl", Community("company3")), "bye"),
-    Post(53, 6, User("mehdi", Community("company4")), "bah bah"),
-    Post(52, 9, User("morteza", Community("company5")), "manteghie"),
-    Post(55, 8, User("mehdi m", Community("company6")), "eeeeeee"),
-    Post(52, 22, User("eshgam j", Community("company2")), "feshar bokhor"),
-    Post(50, 22121, User("mehdi zi", Community("company1")), "eeeeee"),
+    Post(55, 33, User("mahmod", Community("company1")),
+        "Engineering requires many building blocks and tools. To produce real world results, one must practically apply mathematics and sciences to tangible problems and scenarios. Included in this category are the various technical topics which cut across engineering disciplines, encompassing many branches of mathematics and scientific disciplines."),
+    Post(52, 655, User("nader", Community("company2")),
+        "STARS articles are peer-reviewed articles on the history of major developments in technology. Available in the scientific tools and discovery category are:"),
+    Post(500, 33, User("abolfazl", Community("company3")),
+        "The introduction of electric power in the 19th century led to the rise of electrical and hybrid electro-mechanical devices to carry out both digital (Hollerith punch-card machine) and analog (Bush’s differential analyzer) calculation. Telephone switching came to be based on this technology, which led to the development of machines that we would recognize as early computers."),
+    Post(53, 6, User("mehdi", Community("company4")),
+        "The presentation of the Edison Effect in 1885 provided the theoretical background for electronic devices. Originally in the form of vacuum tubes, electronic components were rapidly integrated into electric devices, revolutionizing radio and later television. It was in computers however, where the full impact of electronics was felt. Analog computers used to calculate ballistics were crucial to the outcome of World War II, and the Colossus and the ENIAC, the two earliest electronic digital computers, were developed during the war."),
+    Post(52, 9, User("morteza", Community("company5")),
+        "With the invention of solid-state electronics, the transistor and ultimately the integrated circuit, computers would become much smaller and eventually affordable for the average consumer. Today “computers” are present in nearly every aspect of everyday life, from watches to automobiles."),
+    Post(55, 8, User("mehdi m", Community("company6")),
+        "Computer engineering (CoE or CpE) is a branch of electrical engineering that integrates several fields of computer science and electronic engineering required to develop computer hardware and software.[1] Computer engineers usually have training in electronic engineering, software design, and hardware-software integration instead of only software engineering or electronic engineering. Computer engineers are involved in many hardware and software aspects of computing, from the design of individual microcontrollers, microprocessors, personal computers, and supercomputers, to circuit design. This field of engineering not only focuses on how computer systems themselves work but also how they integrate into the larger picture.[2]"),
+    Post(52, 22, User("eshgam j", Community("company2")),
+        "Usual tasks involving computer engineers include writing software and firmware for embedded microcontrollers, designing VLSI chips, designing analog sensors, designing mixed signal circuit boards, and designing operating systems. Computer engineers are also suited for robotics research, which relies heavily on using digital systems to control and monitor electrical systems like motors, communications, and sensors."),
+
   ];
+
 
   int SelectedPage;
   int listCounter;
   int index;
   final double iconSize = 30;
+  TextEditingController inString = TextEditingController();
 
   _FeedPage(this.SelectedPage);
-  List<Widget> pages = [Alerts(), maps(), add(), dashbord()];
+  List<Widget> pages = [Alerts(), maps(), CreatPage(), dashbord()];
 
   @override
   Widget build(BuildContext context) {
@@ -84,26 +95,35 @@ class _FeedPage extends State<FeedPage> {
             ),
             padding: EdgeInsets.only(left: 10),
             onPressed: () {
-              // do something
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => dashbord()));
             },
           ),
           backgroundColor: Color.fromRGBO(233, 188, 14, 0),
 
           title: Container(
-              // alignment: Alignment.center,
               width: 300,
               height: 40,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                   color: Colors.black12,
                   borderRadius: BorderRadius.circular(100)),
-              margin: EdgeInsets.only(right: 50, top: 6),
+              margin: EdgeInsets.only(right: 50),
               child: TextField(
+                controller: TextEditingController(),
                 decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search),
+                    prefixIcon: IconButton(
+                      icon: Icon(Icons.search),
+                      color: Colors.deepOrange,
+                    ),
+
+
                     suffixIcon: IconButton(
                       icon: Icon(Icons.clear),
                       onPressed: () {
+                        setState(() {
+                          inString = null;
+                        });
                         /* Clear the search field */
                       },
                     ),
@@ -130,6 +150,7 @@ class _FeedPage extends State<FeedPage> {
               return _widget(list[index]);
             }),
         bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Colors.black,
           type: BottomNavigationBarType.fixed,
           iconSize: 30,
           items: [
@@ -139,6 +160,7 @@ class _FeedPage extends State<FeedPage> {
                 color: Colors.black,
               ),
               label: 'Home',
+
             ),
             BottomNavigationBarItem(
               icon: Icon(
@@ -167,6 +189,7 @@ class _FeedPage extends State<FeedPage> {
                 color: Colors.black,
               ),
               label: 'Inbox',
+
             )
           ],
           onTap: _onItemTapped,
@@ -203,7 +226,9 @@ class _FeedPage extends State<FeedPage> {
     return Container(
       child: Column(
         children: [
+
           ListTile(
+
             leading: CircleAvatar(
               child: Image(
                 image: AssetImage("assets/logo.png"), //aks ekhtesasi
@@ -215,11 +240,15 @@ class _FeedPage extends State<FeedPage> {
             title: Text(post.user.community.name),
             subtitle: Text(post.user.name),
             tileColor: Colors.black38,
+            //onTap: ,
           ),
+
           ListTile(
             tileColor: Colors.black12,
             title: Text(post.post),
+            //onTap: ,
           ),
+
           Row(
             children: [
               Container(
@@ -228,7 +257,7 @@ class _FeedPage extends State<FeedPage> {
                       color: Colors.black38, size: 25.0),
                   onPressed: () {
                     setState(() {
-                      /* on pressed    */
+                      post.vote++;
                     });
                   },
                 ),
@@ -243,7 +272,12 @@ class _FeedPage extends State<FeedPage> {
               Container(
                 margin: EdgeInsets.only(top: 2),
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        post.vote--;
+                      });
+
+                    },
                     icon: Icon(
                       Icons.arrow_downward_rounded,
                       color: Colors.black38,
@@ -258,7 +292,12 @@ class _FeedPage extends State<FeedPage> {
                       color: Colors.black38,
                       size: 25.0,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        post.comment++;
+                      });
+
+                    },
                   )),
               Container(
                 margin: EdgeInsets.only(top: 1),

@@ -22,18 +22,18 @@ class dashbord extends StatefulWidget {
 class _dashbord extends State<dashbord> {
 
   List<Community> comunities = [
-    Community("gdgdgg"),
-    Community("gdgdgg1"),
-    Community("gdgdgg2"),
-    Community("gdgdgg3"),
-    Community("gdgdggsdasd"),
-    Community("gdgdggasd"),
-    Community("gdg444dgg"),
-    Community("gdgdgg66"),
-    Community("سلام"),
-    Community("sbu."),
-    Community("[dede]-0"),
-    Community("gdgdg{{{{{{[[[lkkنg"),
+    Community("Computer Engniering"),
+    Community("Group1"),
+    Community("001"),
+    Community("SBU"),
+    Community("Sharif00141"),
+    Community("F(*)F"),
+    Community("استقلال**"),
+    Community("SBU.Computer"),
+    Community("sbu1234560"),
+    Community("sbu.025"),
+    Community("ssbbuuuuuu"),
+    Community("Mehdi.Co"),
   ];
   int SelectedPage = 1;
 
@@ -41,17 +41,6 @@ class _dashbord extends State<dashbord> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //leading: Icon(Icons.pending,color: Colors.indigo,),
-        leading: IconButton(
-          icon: Icon(
-            Icons.dehaze,
-            color: Colors.deepOrange,
-          ),
-          padding: EdgeInsets.only(left: 10),
-          onPressed: () {
-            // do something
-          },
-        ),
         backgroundColor: Color.fromRGBO(233, 188, 14, 0),
 
         title : Container(
@@ -104,6 +93,7 @@ class _dashbord extends State<dashbord> {
 
 
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.black,
         type: BottomNavigationBarType.fixed,
         iconSize: 30,
         items:[
@@ -112,7 +102,6 @@ class _dashbord extends State<dashbord> {
               SelectedPage==0?Icons.home:
               Icons.home_outlined,
               color: Colors.black,
-
             ),
             label: 'Home',
           ),
@@ -193,8 +182,14 @@ class _dashbord extends State<dashbord> {
             trailing: GestureDetector(
               child: Container(
     margin: EdgeInsets.only(right: 2),
-    child:IconButton(onPressed: (){}, icon: Icon(
-    Icons.star_border,
+    child:IconButton(onPressed: (){
+      setState(() {
+        community.liked=!community.liked;
+      });
+    }, icon: Icon(
+
+      community.liked?Icons.star:
+      Icons.star_border,
 
     )) ,
                 ),
