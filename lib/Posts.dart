@@ -59,6 +59,7 @@ class _State extends State<Posts> {
     var post = widget.post;
     return Container(
 
+
       child: Column(
         children: [
           // Container(
