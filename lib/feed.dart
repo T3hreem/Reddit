@@ -1,4 +1,3 @@
-// import 'dart:ffi';
 import 'creat.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'inbox.dart';
 import 'maps.dart';
 import 'add.dart';
 import 'dashbord.dart';
-//import 'package:redit/SplashScreen.dart';
 import 'setting.dart';
 import 'chat.dart';
 
@@ -30,9 +28,9 @@ class Community {
 }
 
 class Post {
-  int comment;
+  int comment;               // AssetImage("assets/uea1.png")
   int vote;
-  Image profile;
+  Image profile = Image.asset('assets/uea.png');//(image:Image.asset("assets/uea.png"), fit: BoxFit.fill);
   User user;
   String post;
 
@@ -69,7 +67,6 @@ class _FeedPage extends State<FeedPage> {
         "Computer engineering (CoE or CpE) is a branch of electrical engineering that integrates several fields of computer science and electronic engineering required to develop computer hardware and software.[1] Computer engineers usually have training in electronic engineering, software design, and hardware-software integration instead of only software engineering or electronic engineering. Computer engineers are involved in many hardware and software aspects of computing, from the design of individual microcontrollers, microprocessors, personal computers, and supercomputers, to circuit design. This field of engineering not only focuses on how computer systems themselves work but also how they integrate into the larger picture.[2]"),
     Post(52, 22, User("eshgam j", Community("company2")),
         "Usual tasks involving computer engineers include writing software and firmware for embedded microcontrollers, designing VLSI chips, designing analog sensors, designing mixed signal circuit boards, and designing operating systems. Computer engineers are also suited for robotics research, which relies heavily on using digital systems to control and monitor electrical systems like motors, communications, and sensors."),
-
   ];
 
 
@@ -84,6 +81,7 @@ class _FeedPage extends State<FeedPage> {
 
   @override
   Widget build(BuildContext context) {
+    list[0].profile = Image(image: AssetImage("assets/logo.png"));
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -228,24 +226,28 @@ class _FeedPage extends State<FeedPage> {
         children: [
 
           ListTile(
-
-            leading: CircleAvatar(
-              child: Image(
-                image: AssetImage("assets/logo.png"), //aks ekhtesasi
-                fit: BoxFit.cover,
-              ),
+            leading: CircleAvatar(//"assets/logo.png"
+              //backgroundImage: NetworkImage("https://picsum.photos/200/300"),
+              child: post.profile, //aks ekhtesasi
               backgroundColor: Colors.black,
-              radius: 20,
+              radius: 25,
+              //backgroundImage: AssetImage("assets/uea1.png"),
             ),
             title: Text(post.user.community.name),
-            subtitle: Text(post.user.name),
+            subtitle: Text(
+                post.user.name,
+                style : TextStyle(fontFamily: 'Raleway'),
+            ),
+
             tileColor: Colors.black38,
             //onTap: ,
           ),
 
           ListTile(
             tileColor: Colors.black12,
-            title: Text(post.post),
+            title: Text(post.post,
+            style: TextStyle(fontFamily: ''),
+            ),
             //onTap: ,
           ),
 
