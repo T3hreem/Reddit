@@ -184,6 +184,7 @@ class _CreatPageState extends State<CreatPage> {
         ]),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.black,
         type: BottomNavigationBarType.fixed,
         iconSize: 30,
         items: [

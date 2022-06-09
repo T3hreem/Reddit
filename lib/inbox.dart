@@ -79,6 +79,7 @@ class _InboxPageState extends State<InboxPage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.black,
         type: BottomNavigationBarType.fixed,
         iconSize: 30,
         items:[

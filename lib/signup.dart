@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'feed.dart';
+
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key key}) : super(key: key);
 
@@ -136,6 +138,5 @@ Widget inputFile({label, obscureText = false}) {
     ],
   );
 }
-
 
 

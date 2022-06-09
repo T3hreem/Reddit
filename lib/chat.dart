@@ -61,6 +61,7 @@ class _ChatPageState extends State<ChatPage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.black,
         type: BottomNavigationBarType.fixed,
         iconSize: 30,
         items:[

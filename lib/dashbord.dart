@@ -1,4 +1,5 @@
 
+import 'package:ap_project/CommunityPage.dart';
 import 'package:ap_project/chat.dart';
 import 'package:ap_project/creat.dart';
 import 'package:ap_project/inbox.dart';
@@ -7,6 +8,7 @@ import 'package:ap_project/setting.dart';
 import 'Alerts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'CommunityPage.dart';
 import 'feed.dart';
 import 'add.dart';
 import 'maps.dart';
@@ -160,7 +162,7 @@ class _dashbord extends State<dashbord> {
           ListTile(
             leading: CircleAvatar(
                     child: Image(
-                        image: AssetImage("assets/logo.png"), //aks ekhtesasi
+                        image: AssetImage("assets/logo.png"),
                     fit: BoxFit.cover,),
                   backgroundColor: Colors.black,
                   radius: 24,
@@ -194,6 +196,8 @@ class _dashbord extends State<dashbord> {
     )) ,
                 ),
               ),
+            onTap: (){
+            },
             ),
         ],
       ),
