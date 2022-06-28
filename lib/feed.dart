@@ -183,8 +183,11 @@ class _FeedPage extends State<FeedPage> {
                     prefixIcon: IconButton(
                       icon: Icon(Icons.search),
                       color: Colors.deepOrange,
+                      onPressed:(){
+                        /////
+                        setState(() {});
+                      },
                     ),
-
 
                     suffixIcon: IconButton(
                       icon: Icon(Icons.clear),
@@ -212,6 +215,7 @@ class _FeedPage extends State<FeedPage> {
             )
           ],
         ),
+
         body: ListView.builder(
             itemCount: 5,
             itemBuilder: (BuildContext context, int index) {
