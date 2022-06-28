@@ -1,10 +1,16 @@
 
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'feed.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key key}) : super(key: key);
-
+  SignUpPage({Key key}) : super(key: key);
+  TextEditingController email = TextEditingController(text: "");
+  TextEditingController username = TextEditingController(text: "");
+  TextEditingController password = TextEditingController(text: "");
+  TextEditingController configpassword = TextEditingController(text: "");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +80,8 @@ class SignUpPage extends StatelessWidget {
                         child: MaterialButton(
                           minWidth: double.infinity,
                           height: 60,
-                          onPressed: () {
+                          onPressed: () { ///////////////0(pasword qalat) 1(okeye) -1(moshkel!!)////////////////////
+                            send();
                             Navigator.push(context, MaterialPageRoute(builder: (context) => FeedPage()));
                           },
                           color: Colors.deepOrange,
@@ -107,6 +114,19 @@ class SignUpPage extends StatelessWidget {
         ),
       ),
     );
+  }
+  Future<int> send() async {
+    String request = "checkInf-$email-$username-$password\u0000";
+    bool check;
+    // if(password!=configpassword){
+    //   return 0;
+    // }
+
+    await Socket.connect("10.0.2.2", 1234).then((serverSocket){
+      serverSocket.write("seyyed\u0000");
+      serverSocket.flush();
+      serverSocket.listen((response){check = response as bool;});
+    });
   }
 }
 
