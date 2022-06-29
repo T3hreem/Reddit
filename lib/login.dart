@@ -145,7 +145,6 @@ class LoginPage extends StatelessWidget {
     }
   }
 }
-
 Widget inputFile({label, obscureText = false}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,

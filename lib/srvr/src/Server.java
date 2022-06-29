@@ -11,6 +11,7 @@ public class Server {
         ServerSocket serverSocket = new ServerSocket(1234);
 
         while (true){
+            
             Socket socket = serverSocket.accept();
             System.out.println("Connected");
             RequestHandler requestHandler = new RequestHandler(socket);
