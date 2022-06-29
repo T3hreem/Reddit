@@ -116,14 +116,14 @@ class SignUpPage extends StatelessWidget {
     );
   }
   Future<int> send() async {
-    String request = "checkInf-$email-$username-$password\u0000";
+    String request = "signup-$email-$username-$password\u0000";
     bool check;
-    // if(password!=configpassword){
-    //   return 0;
-    // }
+    if(password!=configpassword){
+       return 0;
+    }
 
     await Socket.connect("10.0.2.2", 1234).then((serverSocket){
-      serverSocket.write("seyyed\u0000");
+      serverSocket.write(request);
       serverSocket.flush();
       serverSocket.listen((response){check = response as bool;});
     });

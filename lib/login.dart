@@ -1,12 +1,17 @@
 
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'feed.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key key}) : super(key: key);
-
+  LoginPage({Key key}) : super(key: key);
+  TextEditingController email = TextEditingController(text: "");
+  TextEditingController username = TextEditingController(text: "");
+  TextEditingController password = TextEditingController(text: "");
+  TextEditingController configpassword = TextEditingController(text: "");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,6 +126,23 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+  Future<int> send() async {
+    String request = "login-$email-$username-$password\u0000";
+    bool check;
+    if(password!=configpassword){
+      return 0;
+    }
+
+    await Socket.connect("10.0.2.2", 1234).then((serverSocket){
+      serverSocket.write(request);
+      serverSocket.flush();
+      serverSocket.listen((response){check = response as bool;});
+    });
+    if (check){return 1;}
+    else {
+      return -1;
+    }
   }
 }
 

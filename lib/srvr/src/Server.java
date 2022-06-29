@@ -1,9 +1,10 @@
 import java.io.*;
-import java.lang.invoke.SwitchPoint;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Server {
     public void main(String[] args) throws Exception{
@@ -53,9 +54,10 @@ class RequestHandler {
             }
 
     public void Switch(String[] arr) {
+        boolean result;
         switch (arr[0]) {
-            case "checkInf":
-                boolean result = new dataBase("C:\\Users\\Admin\\AndroidStudioProjects\\Redditt\\lib\\srvr\\src\\Data.txt").checkInf(arr);
+            case "signup":
+                result = new dataBase("C:\\Users\\Admin\\AndroidStudioProjects\\Redditt\\lib\\srvr\\src\\Data.txt").signup(arr);
                 try {
                     if (result){
                         dos.writeBytes("true");
@@ -68,7 +70,10 @@ class RequestHandler {
                     System.out.println(Arrays.toString(e.getStackTrace()));
                 }
                     break;
-            case "":
+
+            case "login":
+                int result1 = new dataBase("C:\\Users\\Admin\\AndroidStudioProjects\\Redditt\\lib\\srvr\\src\\Data.txt").login(arr);
+            case "person":
                 }
             }
         }
@@ -76,9 +81,9 @@ class RequestHandler {
 class dataBase{
     String path;
     public dataBase(String path){this.path = path;}
-    public boolean checkInf(String[] arr){
+
+    public boolean signup(String[] arr){
         String email = arr[1];
-        String password = arr[3];
         boolean result;
 
         File file = new File(path);
@@ -86,12 +91,34 @@ class dataBase{
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()){
                 String[] voroodi = scanner.nextLine().split("-");
-
-                return !voroodi[0].equals(email);
+                if (voroodi[0].equals(email))
+                    return false;
             }
+            Pattern pattern = Pattern.compile("");
+            Matcher matcher = pattern.matcher(email);
+            return !matcher.find();
         }catch (Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
         return true;
+    }
+
+    public  int login(String[] arr){
+        String username = arr[2];
+        String password = arr[3];
+        File file = new File(path);
+        try {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()){
+                String[] voroodi = sc.nextLine().split("-");
+                if (username.equals(voroodi[2])){
+                    return 0;
+                }
+            }
+            return 1;
+        }catch (Exception e){
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        }
+        return 1;
     }
 }
