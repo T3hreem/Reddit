@@ -11,7 +11,6 @@ public class Server {
         ServerSocket serverSocket = new ServerSocket(1234);
 
         while (true){
-            
             Socket socket = serverSocket.accept();
             System.out.println("Connected");
             RequestHandler requestHandler = new RequestHandler(socket);
@@ -20,7 +19,6 @@ public class Server {
         }
     }
 }
-
 
 class RequestHandler {
     Socket socket;
@@ -55,71 +53,99 @@ class RequestHandler {
             }
 
     public void Switch(String[] arr) {
-        boolean result;
+        int result;
         switch (arr[0]) {
             case "signup":
                 result = new dataBase("C:\\Users\\Admin\\AndroidStudioProjects\\Redditt\\lib\\srvr\\src\\Data.txt").signup(arr);
                 try {
-                    if (result){
-                        dos.writeBytes("true");
-                        dos.flush();}
-                    else {
-                        dos.writeBytes("false");
+                        dos.writeBytes(String.valueOf(result));
                         dos.flush();
-                    }
                 }catch (Exception e){
                     System.out.println(Arrays.toString(e.getStackTrace()));
                 }
                     break;
 
             case "login":
-                int result1 = new dataBase("C:\\Users\\Admin\\AndroidStudioProjects\\Redditt\\lib\\srvr\\src\\Data.txt").login(arr);
+                result = new dataBase("C:\\Users\\Admin\\AndroidStudioProjects\\Redditt\\lib\\srvr\\src\\Data.txt").login(arr);
+                try {
+                        dos.writeBytes(String.valueOf(result));
+                        dos.flush();
+                }catch (Exception e){
+                    System.out.println(Arrays.toString(e.getStackTrace()));
+                }
+
+                break;
             case "person":
                 }
             }
         }
 
 class dataBase{
-    String path;
-    public dataBase(String path){this.path = path;}
+    public String path;
+    public dataBase(String path){
+        this.path = path;
+    }
 
-    public boolean signup(String[] arr){
-        String email = arr[1];
-        boolean result;
+    public int login(String[] arr){
+        String username = arr[2];
+        String password = arr[3];
+        int num = 0;
 
         File file = new File(path);
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()){
+                num++;
                 String[] voroodi = scanner.nextLine().split("-");
-                if (voroodi[0].equals(email))
-                    return false;
+                if (voroodi[1].equals(username))
+                    if (voroodi[2].equals(password))
+                        return num;
             }
-            Pattern pattern = Pattern.compile("");
-            Matcher matcher = pattern.matcher(email);
-            return !matcher.find();
+            return 0;
         }catch (Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
+            return 0;
         }
-        return true;
     }
 
-    public  int login(String[] arr){
-        String username = arr[2];
-        String password = arr[3];
+    public  int signup(String[] arr){
+        String email = arr[1];
         File file = new File(path);
         try {
+            Pattern pattern = Pattern.compile("^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\\.([a-zA-Z]{3})$");
+            Matcher matcher = pattern.matcher(email);
+            if (!matcher.find()){
+                return 0;
+            }
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()){
                 String[] voroodi = sc.nextLine().split("-");
-                if (username.equals(voroodi[2])){
-                    return 0;
+                if (voroodi[0].equals(email)){
+                    return -1;
                 }
             }
-            return 1;
+            boolean rslt = writeFile(arr);
+            if (rslt)
+                return 1;
+            else
+                return 0;
         }catch (Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
-        return 1;
+        return 0;
+    }
+
+    public boolean writeFile(String[] arr){
+        String result = arr[1] + "-" + arr[2] + "-" + arr[3];
+        File file = new File(path);
+        try {
+            RandomAccessFile randomAccessFile = new RandomAccessFile(path,"rw");
+            randomAccessFile.seek(file.length());
+            randomAccessFile.writeUTF(result);
+        }catch (IOException e){
+            System.out.println(Arrays.toString(e.getStackTrace()));
+            return false;
+        }
+        return true;
     }
 }
