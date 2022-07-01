@@ -71,7 +71,7 @@ class WelcomePage extends StatelessWidget {
                         minWidth: double.infinity,
                         height: 60,
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => signup()));
                         },
                         color: Colors.deepOrange,
                         shape: RoundedRectangleBorder(

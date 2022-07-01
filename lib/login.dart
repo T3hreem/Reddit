@@ -6,12 +6,10 @@ import 'package:flutter/material.dart';
 
 import 'feed.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
-  TextEditingController email = TextEditingController(text: "");
   TextEditingController username = TextEditingController(text: "");
   TextEditingController password = TextEditingController(text: "");
-  TextEditingController configpassword = TextEditingController(text: "");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,8 +58,8 @@ class LoginPage extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: Column(
                         children: <Widget>[
-                          inputFile(label: "Username"),
-                          inputFile(label: "Password", obscureText: true),
+                          inputFile(label: "username",TextEditingController: username),
+                          inputFile(label: "Password", obscureText: true,TextEditingController: password),
                         ],
                       ),
                     ),
@@ -81,6 +79,23 @@ class LoginPage extends StatelessWidget {
                           minWidth: double.infinity,
                           height: 60,
                           onPressed: () {
+                            int x = send() as int;
+                            while(x==0) {
+                              Container(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Invalid",
+                                      style: TextStyle(
+                                          backgroundColor: Colors.red,
+                                          color: Colors.black
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              );
+                              x = send() as int;
+                            }
                             Navigator.push(context, MaterialPageRoute(builder: (context) => FeedPage()));
                           },
                           color: Colors.deepOrange,
@@ -128,12 +143,8 @@ class LoginPage extends StatelessWidget {
     );
   }
   Future<int> send() async {
-    String request = "login-$email-$username-$password\u0000";
+    String request = "login-$username-$password\u0000";
     bool check;
-    if(password!=configpassword){
-      return 0;
-    }
-
     await Socket.connect("10.0.2.2", 1234).then((serverSocket){
       serverSocket.write(request);
       serverSocket.flush();
@@ -144,8 +155,14 @@ class LoginPage extends StatelessWidget {
       return -1;
     }
   }
+
+  @override
+  State<StatefulWidget> createState() {
+    LoginPage createState() => LoginPage();
+  }
 }
-Widget inputFile({label, obscureText = false}) {
+
+Widget inputFile({label, obscureText = false, TextEditingController TextEditingController}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -159,13 +176,14 @@ Widget inputFile({label, obscureText = false}) {
       ),
       TextField(
         obscureText: obscureText,
+        controller: TextEditingController,
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
             border:
-            OutlineInputBorder(borderSide: BorderSide(color: Colors.grey))),
+              OutlineInputBorder(borderSide: BorderSide(color: Colors.grey))),
       ),
       SizedBox(
         height: 10,

@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Server {
-    public void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception{
         ServerSocket serverSocket = new ServerSocket(1234);
 
         while (true){
@@ -58,6 +58,7 @@ class RequestHandler {
             case "signup":
                 result = new dataBase("C:\\Users\\Admin\\AndroidStudioProjects\\Redditt\\lib\\srvr\\src\\Data.txt").signup(arr);
                 try {
+                    System.out.println("The result:  "+result);
                         dos.writeBytes(String.valueOf(result));
                         dos.flush();
                 }catch (Exception e){
@@ -127,8 +128,8 @@ class dataBase{
             boolean rslt = writeFile(arr);
             if (rslt)
                 return 1;
-            else
-                return 0;
+            else{
+                return 0;}
         }catch (Exception e){
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
@@ -141,11 +142,11 @@ class dataBase{
         try {
             RandomAccessFile randomAccessFile = new RandomAccessFile(path,"rw");
             randomAccessFile.seek(file.length());
-            randomAccessFile.writeUTF(result);
+            randomAccessFile.writeUTF(result + "\n");
+            return true;
         }catch (IOException e){
             System.out.println(Arrays.toString(e.getStackTrace()));
             return false;
         }
-        return true;
     }
 }

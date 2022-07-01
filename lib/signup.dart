@@ -1,16 +1,24 @@
-
-
 import 'dart:io';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'feed.dart';
 
-class SignUpPage extends StatelessWidget {
-  SignUpPage({Key key}) : super(key: key);
+class signup extends StatefulWidget {
+  const signup({Key key}) : super(key: key);
+
+  @override
+  State<signup> createState() => _signupState();
+}
+
+class _signupState extends State<signup> {
+  String check = "";
   TextEditingController email = TextEditingController(text: "");
   TextEditingController username = TextEditingController(text: "");
   TextEditingController password = TextEditingController(text: "");
   TextEditingController configpassword = TextEditingController(text: "");
+  Widget massage1(){
+    return FloatingActionButton(onPressed:(){},backgroundColor: Colors.indigo);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,10 +66,10 @@ class SignUpPage extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: Column(
                         children: <Widget>[
-                          inputFile(label: "Email"),
-                          inputFile(label: "Username"),
-                          inputFile(label: "Password", obscureText: true),
-                          inputFile(label: "Confirm Password", obscureText: true),
+                          inputFile(label: "Email",TextEditingController: email),
+                          inputFile(label: "Username",TextEditingController: username),
+                          inputFile(label: "Password", obscureText: true,TextEditingController: password),
+                          inputFile(label: "Confirm Password", obscureText: true,TextEditingController: configpassword),
                         ],
                       ),
                     ),
@@ -82,8 +90,32 @@ class SignUpPage extends StatelessWidget {
                           height: 60,
                           onPressed: () { ///////////////0(pasword qalat) 1(okeye) -1(moshkel!!)////////////////////
                             send();
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => FeedPage()));
-                          },
+                            print("Cheeeeeeeeeeeeeeeeeeeeeeeeeeeeeeck isssssss $check");
+
+                            if (check=="1")
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => FeedPage()));
+                            if (check=="0"){
+                              setState(() {
+                                massage1();
+                              });
+                            }
+                            if (check=="-1"){
+                              Container(
+                                decoration: new BoxDecoration(
+                                  borderRadius: new BorderRadius.circular(16.0),
+                                  color: Colors.green,
+                                ),
+                                child: Text(
+                                  "Sorry!This email is exist too",
+                                  style: TextStyle(
+                                    backgroundColor: Colors.red,
+                                    color: Colors.black,
+
+                                  ),
+                                ),
+                              );
+                            }
+                            },
                           color: Colors.deepOrange,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
@@ -115,21 +147,29 @@ class SignUpPage extends StatelessWidget {
       ),
     );
   }
-  Future<int> send() async {
-    String request = "signup-$email-$username-$password\u0000";
-    bool check;
-    if(password!=configpassword){
-       return 0;
+  send() async {
+    if(password.text != configpassword.text){
+      check = "0";
+      return;
     }
-
+    String request = "signup-" + email.text + "-" + username.text + "-" + password.text + "-\u0000";
     await Socket.connect("10.0.2.2", 1234).then((serverSocket){
+
       serverSocket.write(request);
       serverSocket.flush();
-      serverSocket.listen((response){check = response as bool;});
+
+      serverSocket.listen((response){
+        print(String.fromCharCodes(response));
+          check = String.fromCharCodes(response);
+        }
+        );
     });
+
   }
+
 }
-Widget inputFile({label, obscureText = false}) {
+
+Widget inputFile({label, obscureText = false,TextEditingController TextEditingController}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -142,6 +182,7 @@ Widget inputFile({label, obscureText = false}) {
         height: 5,
       ),
       TextField(
+        controller: TextEditingController,
         obscureText: obscureText,
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
@@ -158,4 +199,26 @@ Widget inputFile({label, obscureText = false}) {
   );
 }
 
+Widget massage(){
+  return Container(
+    padding: EdgeInsets.only(left: 22222),
+    decoration: new BoxDecoration(
+      borderRadius: new BorderRadius.circular(160.0),
+      color: Colors.blueAccent,
+    ),
+    child:Row(
+      children:[
+        Text(
+          "Sorry!The email is not correct",
+          style: TextStyle(
+            fontSize: 1000,
+            backgroundColor: Colors.red,
+            color: Colors.black,
+
+          ),
+        ),
+      ],
+    ) ,
+  );
+}
 
