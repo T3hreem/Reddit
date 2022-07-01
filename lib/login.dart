@@ -1,15 +1,22 @@
 
-import 'dart:io';
 
+
+import 'dart:io';
+import 'signup.dart';
+import 'package:ap_project/WarningPage.dart';
+import 'package:ap_project/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'feed.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   LoginPage({Key key}) : super(key: key);
+
   TextEditingController username = TextEditingController(text: "");
   TextEditingController password = TextEditingController(text: "");
+  String check;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +65,7 @@ class LoginPage extends StatefulWidget {
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: Column(
                         children: <Widget>[
-                          inputFile(label: "username",TextEditingController: username),
+                          inputFile(label: "Username",TextEditingController: username),
                           inputFile(label: "Password", obscureText: true,TextEditingController: password),
                         ],
                       ),
@@ -79,24 +86,12 @@ class LoginPage extends StatefulWidget {
                           minWidth: double.infinity,
                           height: 60,
                           onPressed: () {
-                            int x = send() as int;
-                            while(x==0) {
-                              Container(
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "Invalid",
-                                      style: TextStyle(
-                                          backgroundColor: Colors.red,
-                                          color: Colors.black
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
-                              x = send() as int;
+                            send();
+                            if (check!="0")
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => FeedPage()));
+                            else{
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => WarningPage1()));
                             }
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => FeedPage()));
                           },
                           color: Colors.deepOrange,
                           elevation: 0,
@@ -118,13 +113,17 @@ class LoginPage extends StatefulWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text("Don't have an acount?"),
-                        Text(
-                          " Sign up",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          ),
-                        )
+
+                        InkWell(
+                          child:Text(
+                              " Sign up",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                              ),
+                            ) ,
+                          onTap:(){ Navigator.push(context, MaterialPageRoute(builder: (context) => signup()));},
+                          ) ,
                       ],
                     ),
                     Container(
@@ -142,27 +141,24 @@ class LoginPage extends StatefulWidget {
       ),
     );
   }
-  Future<int> send() async {
-    String request = "login-$username-$password\u0000";
-    bool check;
+  send() async {
+    String request = "login-" + username.text + "-" + password.text + "-\u0000";
     await Socket.connect("10.0.2.2", 1234).then((serverSocket){
+
       serverSocket.write(request);
       serverSocket.flush();
-      serverSocket.listen((response){check = response as bool;});
-    });
-    if (check){return 1;}
-    else {
-      return -1;
-    }
-  }
 
-  @override
-  State<StatefulWidget> createState() {
-    LoginPage createState() => LoginPage();
+      serverSocket.listen((response){
+        print(String.fromCharCodes(response));
+        check = String.fromCharCodes(response);
+      }
+      );
+    });
+
   }
 }
 
-Widget inputFile({label, obscureText = false, TextEditingController TextEditingController}) {
+Widget inputFile({label, obscureText = false,TextEditingController TextEditingController}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -175,15 +171,15 @@ Widget inputFile({label, obscureText = false, TextEditingController TextEditingC
         height: 5,
       ),
       TextField(
-        obscureText: obscureText,
         controller: TextEditingController,
+        obscureText: obscureText,
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
             border:
-              OutlineInputBorder(borderSide: BorderSide(color: Colors.grey))),
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.grey))),
       ),
       SizedBox(
         height: 10,

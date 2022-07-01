@@ -88,8 +88,8 @@ class dataBase{
     }
 
     public int login(String[] arr){
-        String username = arr[2];
-        String password = arr[3];
+        String username = arr[1];
+        String password = arr[2];
         int num = 0;
 
         File file = new File(path);

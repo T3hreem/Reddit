@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'War2.dart';
+import 'War3.dart';
 import 'feed.dart';
 
 class signup extends StatefulWidget {
@@ -16,9 +18,6 @@ class _signupState extends State<signup> {
   TextEditingController username = TextEditingController(text: "");
   TextEditingController password = TextEditingController(text: "");
   TextEditingController configpassword = TextEditingController(text: "");
-  Widget massage1(){
-    return FloatingActionButton(onPressed:(){},backgroundColor: Colors.indigo);
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,30 +89,13 @@ class _signupState extends State<signup> {
                           height: 60,
                           onPressed: () { ///////////////0(pasword qalat) 1(okeye) -1(moshkel!!)////////////////////
                             send();
-                            print("Cheeeeeeeeeeeeeeeeeeeeeeeeeeeeeeck isssssss $check");
-
                             if (check=="1")
                               Navigator.push(context, MaterialPageRoute(builder: (context) => FeedPage()));
                             if (check=="0"){
-                              setState(() {
-                                massage1();
-                              });
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => War3()));
                             }
                             if (check=="-1"){
-                              Container(
-                                decoration: new BoxDecoration(
-                                  borderRadius: new BorderRadius.circular(16.0),
-                                  color: Colors.green,
-                                ),
-                                child: Text(
-                                  "Sorry!This email is exist too",
-                                  style: TextStyle(
-                                    backgroundColor: Colors.red,
-                                    color: Colors.black,
-
-                                  ),
-                                ),
-                              );
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => War2()));
                             }
                             },
                           color: Colors.deepOrange,
